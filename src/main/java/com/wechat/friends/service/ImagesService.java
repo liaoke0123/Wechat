@@ -18,6 +18,6 @@ public interface ImagesService {
 
     Image getImage(String id) throws BusinessException;
     
-    Image deleteImage(String id) throws BusinessException;
+    void deleteImage(String id) throws BusinessException;
     
 }

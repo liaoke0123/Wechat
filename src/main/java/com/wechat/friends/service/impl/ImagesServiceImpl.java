@@ -93,7 +93,7 @@ public class ImagesServiceImpl implements ImagesService {
     }
     
     @Override
-    public Image deleteImage (String id) throws BusinessException {
+    public void deleteImage (String id) throws BusinessException {
         Optional<Image> imageD = imageRepository.findById(id);
 		if(!imageD.isPresent()){
 			throw new BusinessException("file is not existed",0,404);
@@ -107,7 +107,6 @@ public class ImagesServiceImpl implements ImagesService {
 	
 		delDest.delete();
 		imageRepository.deleteById(id);
-		return null;
     }
     
     //***************************private***************************//

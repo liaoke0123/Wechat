@@ -42,10 +42,9 @@ public class ImageController {
     }
     
     @ApiOperation(value = "通过id删除图片")
-    @GetMapping(value = "/deleteFile/{id}")
-    public Object deleteFileByID(@PathVariable String id) throws BusinessException {
+    @DeleteMapping(value = "/deleteFile/{id}")
+    public void deleteFileByID(@PathVariable String id) throws BusinessException {
         imagesService.deleteImage(id);
-        return "删除成功!";
     }
     
 }
