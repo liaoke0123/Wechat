@@ -91,8 +91,25 @@ public class ImagesServiceImpl implements ImagesService {
         }
         return imageO.get();
     }
-
-
+    
+    @Override
+    public Image deleteImage (String id) throws BusinessException {
+        Optional<Image> imageD = imageRepository.findById(id);
+		if(!imageD.isPresent()){
+			throw new BusinessException("file is not existed",0,404);
+		}
+		String imageName=imageD.get().getPhysicalAddress();
+		String delPath = filePath+imageName;
+		File delDest = new File(delPath);
+		if (!delDest.exists()) {
+			throw new BusinessException("file is not existed",0,404);
+		}
+	
+		delDest.delete();
+		imageRepository.deleteById(id);
+		return null;
+    }
+    
     //***************************private***************************//
 
 

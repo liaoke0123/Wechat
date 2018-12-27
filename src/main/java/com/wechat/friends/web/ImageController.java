@@ -40,5 +40,12 @@ public class ImageController {
         map.put("path", path);
         return map;
     }
-
+    
+    @ApiOperation(value = "通过id删除图片")
+    @GetMapping(value = "/deleteFile/{id}")
+    public Object deleteFileByID(@PathVariable String id) throws BusinessException {
+        imagesService.deleteImage(id);
+        return "删除成功!";
+    }
+    
 }

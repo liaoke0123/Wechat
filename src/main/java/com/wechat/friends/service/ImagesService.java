@@ -17,5 +17,7 @@ public interface ImagesService {
     Image createImage(String path, Boolean isZoom, String nickname, Boolean isBase64);
 
     Image getImage(String id) throws BusinessException;
-
+    
+    Image deleteImage(String id) throws BusinessException;
+    
 }
