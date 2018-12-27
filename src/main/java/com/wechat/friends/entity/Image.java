@@ -38,6 +38,22 @@ public class Image {
     @Column(name="base64",nullable = true,columnDefinition = "text") //大文本
     private String base64; //提供的base64的编码
 
+
+    //***************associated*************** //关联表处理
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+    @JoinColumn(name="friend_id")
+    private Friend friend;
+
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Friend friend) {
+        this.friend = friend;
+    }
+
     public String getId() {
         return id;
     }
