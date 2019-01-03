@@ -1,5 +1,6 @@
 package com.wechat.friends.service;
 
+import com.wechat.friends.entity.Friend;
 import com.wechat.friends.entity.Image;
 import com.wechat.friends.exception.BusinessException;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,5 +20,7 @@ public interface ImagesService {
     Image getImage(String id) throws BusinessException;
     
     void deleteImage(String id) throws BusinessException;
+    
+    Image refreshImgFriend(String id,Friend friend) throws BusinessException;
     
 }

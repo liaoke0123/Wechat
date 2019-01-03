@@ -45,8 +45,17 @@ public class Friend {
 
 
     //TODO 评论 点赞
+    
+    
+    public void addImage(Image img){
+        if(img != null){
+            images.add(img);
+        }
+    }
 
-
+    public Friend () {
+    }
+    
     public String getId() {
         return id;
     }

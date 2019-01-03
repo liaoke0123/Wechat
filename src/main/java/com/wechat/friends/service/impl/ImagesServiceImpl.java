@@ -1,6 +1,7 @@
 package com.wechat.friends.service.impl;
 
 import com.wechat.friends.dao.ImageRepository;
+import com.wechat.friends.entity.Friend;
 import com.wechat.friends.entity.Image;
 import com.wechat.friends.exception.BusinessException;
 import com.wechat.friends.service.ImagesService;
@@ -107,6 +108,16 @@ public class ImagesServiceImpl implements ImagesService {
 	
 		delDest.delete();
 		imageRepository.deleteById(id);
+    }
+    
+    @Override
+    public Image refreshImgFriend (String id,Friend friend) throws BusinessException {
+        Optional<Image> img=imageRepository.findById(id);
+        if(!img.isPresent()){
+            throw new BusinessException("file is not existed",0,404);
+        }
+        img.get().setFriend(friend);
+        return imageRepository.saveAndFlush(img.get());
     }
     
     //***************************private***************************//

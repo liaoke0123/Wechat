@@ -31,7 +31,7 @@ public class ImageController {
         map.put("imagePath", dbImage.getPhysicalAddress());
         return map;
     }
-
+	
     @ApiOperation(value = "通过id获取图片访问地址")
     @GetMapping("{id}")
     public Object getFileByID(@PathVariable String id) throws BusinessException {
