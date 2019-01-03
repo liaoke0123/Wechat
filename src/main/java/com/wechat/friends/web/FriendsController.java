@@ -33,7 +33,6 @@ public class FriendsController {
     @PostMapping(value = "/createMoment",produces = "application/json;charset=UTF-8")
     public Object createMoment(@RequestBody FriendsDTO friendsDTO) throws BusinessException {
 		Friend friend=friendsService.createOneMoment(friendsDTO.getContent(),friendsDTO.getIds());
-        System.out.println(friendsDTO.getIds());
         HashMap<String,String> map =  new HashMap<>();
         map.put("friendId",friend.getId());
         return map;

@@ -1,5 +1,6 @@
 package com.wechat.friends.entity;
 
+import com.wechat.friends.fenum.FriendState;
 import com.wechat.friends.fenum.FriendsContentType;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,6 +37,9 @@ public class Friend {
 
     @Column(name="textContent",nullable = true,columnDefinition = "text",length = 2000)
     private String textContent;
+    
+    @Column(name="friendState",nullable = true,length = 30 )
+    private FriendState friendState;
 
     /**
      * https://www.jianshu.com/p/e8caafce5445
@@ -46,12 +50,6 @@ public class Friend {
 
     //TODO 评论 点赞
     
-    
-    public void addImage(Image img){
-        if(img != null){
-            images.add(img);
-        }
-    }
 
     public Friend () {
     }
@@ -111,6 +109,12 @@ public class Friend {
     public void setImages(Set<Image> images) {
         this.images = images;
     }
-
-
+    
+    public FriendState getFriendState () {
+        return friendState;
+    }
+    
+    public void setFriendState (FriendState friendState) {
+        this.friendState = friendState;
+    }
 }
