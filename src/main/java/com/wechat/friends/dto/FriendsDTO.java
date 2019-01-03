@@ -7,27 +7,14 @@ import java.util.List;
 
 public class FriendsDTO {
 
-    //TODO
-
 //    @ApiModelProperty(value="id",required=true)
-//    @NotBlank
-    private String id;
-    
-    
+//    @NotBlank  // 朋友圈图片id
     private List<String> ids;
 
 //    @ApiModelProperty(value="content",required=true)
 //    @NotBlank
     private String content;
     
-    
-    public String getId () {
-        return id;
-    }
-    
-    public void setId (String id) {
-        this.id = id;
-    }
     
     public List<String> getIds () {
         return ids;

@@ -39,7 +39,7 @@ public class Friend {
     private String textContent;
     
     @Column(name="friendState",nullable = true,length = 30 )
-    private FriendState friendState;
+    private FriendState friendState; //朋友圈状态
 
     /**
      * https://www.jianshu.com/p/e8caafce5445
