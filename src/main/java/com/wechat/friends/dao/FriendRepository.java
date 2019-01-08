@@ -12,9 +12,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface FriendRepository extends JpaRepository<Friend,String>,JpaSpecificationExecutor<FriendRepository>{
-
-	@Query("select f from Friend as f where f.id=:id and f.friendState=:friendState")
-	Optional<Friend> findById(@Param("id")String id, @Param("friendState") FriendState friendState);
+	
+	Optional<Friend> findByIdAndFriendState(String id,FriendState friendState);
 	
 	Page<Friend> findAllByFriendState(@Param("friendState")FriendState friendState,Pageable pageable);
 	
