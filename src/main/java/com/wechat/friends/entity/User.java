@@ -12,9 +12,10 @@ import javax.persistence.*;
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class User {
     @Id
-    @GeneratedValue(generator = "jpa-uuid")
+//    @GeneratedValue(generator = "jpa-uuid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 50)
-    private String id;
+    private int id;
     @Column(name="name",nullable = true,length = 50)
     private String name;
     @Column(name="password",nullable = true,length = 50)
@@ -23,11 +24,11 @@ public class User {
     public User() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
