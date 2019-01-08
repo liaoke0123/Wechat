@@ -1,4 +1,3 @@
-
 spring:
   resources:
     static-locations: file:${filePath},classpath:/static/,classpath:/public/,classpath:/resources/,classpath:/META-INF/resources/
@@ -11,9 +10,7 @@ spring:
     database: MYSQL
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎
     show-sql: false
 server:
   port: 12345
