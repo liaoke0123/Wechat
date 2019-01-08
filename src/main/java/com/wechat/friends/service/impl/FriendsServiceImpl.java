@@ -56,8 +56,8 @@ public class FriendsServiceImpl implements FriendsService {
 	}
 	
 	@Override
-	public Page<Friend> getAllMoments (FriendState friendState) throws BusinessException {
-		Page<Friend> result = friendRepository.findAllByFriendState(friendState, PageRequest.of(0, 10));
+	public Page<Friend> getAllMoments (FriendState friendState,int pageSize,int pageNum) throws BusinessException {
+		Page<Friend> result = friendRepository.findAllByFriendState(friendState,PageRequest.of(pageNum,pageSize) );
 		return result;
 	}
 	

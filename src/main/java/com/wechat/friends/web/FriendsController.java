@@ -10,6 +10,8 @@ import com.wechat.friends.service.FriendsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -50,8 +52,8 @@ public class FriendsController {
 	
 	@ApiOperation(value = "获取所有朋友圈并分页显示")
 	@PostMapping(value = "/getAllMoments",produces = "application/json;charset=UTF-8")
-	public Object getAllMoments(@RequestParam("friendState") FriendState friendState) throws BusinessException{
-		Page<Friend> friends=friendsService.getAllMoments(friendState);
+	public Object getAllMoments(@RequestParam("friendState") FriendState friendState,int pageSize,int pageNum) throws BusinessException{
+		Page<Friend> friends=friendsService.getAllMoments(friendState,pageNum,pageSize);
 		return friends;
 	}
 	
