@@ -114,7 +114,7 @@ public class ImagesServiceImpl implements ImagesService {
     public Image refreshImgFriend (String id,Friend friend) throws BusinessException {
         Optional<Image> img=imageRepository.findById(id);
         if(!img.isPresent()){
-            throw new BusinessException("file is not existed",0,404);
+            throw new BusinessException("id is not existed",0,404);
         }
         img.get().setFriend(friend);
         return imageRepository.saveAndFlush(img.get());

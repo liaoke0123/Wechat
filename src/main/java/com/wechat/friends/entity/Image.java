@@ -1,5 +1,6 @@
 package com.wechat.friends.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,7 +41,7 @@ public class Image {
 
 
     //***************associated*************** //关联表处理
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name="friend_id")
     private Friend friend;
@@ -108,5 +109,18 @@ public class Image {
 
     public void setMiniImageId(String miniImageId) {
         this.miniImageId = miniImageId;
+    }
+    
+    @Override
+    public String toString () {
+        return "\nImage{" +
+                "id='" + id + '\'' +
+                ", createdDate=" + createdDate +
+                ", LastModifiedDate=" + LastModifiedDate +
+                ", nickname='" + nickname + '\'' +
+                ", miniImageId='" + miniImageId + '\'' +
+                ", physicalAddress='" + physicalAddress + '\'' +
+                ", base64='" + base64 + '\'' +
+                '}';
     }
 }

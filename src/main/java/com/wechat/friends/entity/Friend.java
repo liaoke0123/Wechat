@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name="wechat_friend")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 @EntityListeners(AuditingEntityListener.class) //JPA自动生成时间等字段
-public class Friend {
+public class Friend{
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
@@ -35,7 +35,7 @@ public class Friend {
     @Column(name="contentType",nullable = false,length = 30)
     private FriendsContentType contentType;
 
-    @Column(name="textContent",nullable = true,columnDefinition = "text",length = 2000)
+    @Column(name="textContent",nullable = false,columnDefinition = "text",length = 2000)
     private String textContent;
     
     @Column(name="friendState",nullable = true,length = 30 )
@@ -116,5 +116,19 @@ public class Friend {
     
     public void setFriendState (FriendState friendState) {
         this.friendState = friendState;
+    }
+    
+    @Override
+    public String toString () {
+        return "\nFriend{" +
+                "id='" + id + '\'' +
+                ", createdDate=" + createdDate +
+                ", LastModifiedDate=" + LastModifiedDate +
+                ", title='" + title + '\'' +
+                ", contentType=" + contentType +
+                ", textContent='" + textContent + '\'' +
+                ", friendState=" + friendState +
+                ", images=" + images +
+                '}';
     }
 }

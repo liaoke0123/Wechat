@@ -3,14 +3,18 @@ package com.wechat.friends.web;
 
 import com.wechat.friends.dto.FriendsDTO;
 import com.wechat.friends.entity.Friend;
+import com.wechat.friends.entity.Image;
 import com.wechat.friends.exception.BusinessException;
+import com.wechat.friends.fenum.FriendState;
 import com.wechat.friends.service.FriendsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.*;
+import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/friends")
@@ -37,9 +41,24 @@ public class FriendsController {
         map.put("friendId",friend.getId());
         return map;
     }
-
-
-
-
+	
+	@ApiOperation(value = "通过id获取一条朋友圈")
+	@PostMapping(value = "/getMomentByID",produces = "application/json;charset=UTF-8")
+	public Object getMomentByID(String id,@RequestParam("friendState") FriendState friendState) throws BusinessException{
+		return friendsService.getOneMoment(id,friendState);
+	}
+	
+	@ApiOperation(value = "获取所有朋友圈并分页显示")
+	@PostMapping(value = "/getAllMoments",produces = "application/json;charset=UTF-8")
+	public Object getAllMoments(@RequestParam("friendState") FriendState friendState) throws BusinessException{
+		Page<Friend> friends=friendsService.getAllMoments(friendState);
+		return friends;
+	}
+	
+	@ApiOperation(value = "通过id删除朋友圈")
+	@DeleteMapping(value = "/deleteMoment/{id}")
+	public void deleteFileByID(@PathVariable String id) throws BusinessException {
+		friendsService.deleteOneMoment(id);
+	}
 
 }
