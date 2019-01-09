@@ -2,6 +2,7 @@ package com.wechat.friends.web;
 
 import com.wechat.friends.dto.UserDTO;
 import com.wechat.friends.entity.User;
+import com.wechat.friends.exception.BusinessException;
 import com.wechat.friends.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,26 +31,26 @@ public class UserController {
 
     //add a user
     @PostMapping(value = "addUser")
-    public String add(@RequestBody(required = false) UserDTO userDTO){
+    public String add(@RequestBody(required = false) UserDTO userDTO) throws BusinessException {
         userService.addUser(userDTO.getName(),userDTO.getPassword());
         return "successfully added";
     }
     //delete a user by id
     @PostMapping(value = "delUser")
-    public String delete(int id){
+    public String delete(int id) throws BusinessException {
         userService.delUser(id);
         return "successfully deleted";
     }
     //update a user
     @PostMapping(value = "updateUser")
-    public String update(User user){
+    public String update(User user) throws BusinessException {
         userService.updateUser(user.getId(),user.getName(),user.getPassword());
         return "successfully updated";
     }
 
     //list all users
     @PostMapping(value = "listAllUser")
-    public Page<User> listAll(Integer page , Integer size){
+    public Page<User> listAll(Integer page , Integer size) throws BusinessException {
         //sort by id in asc
         Sort sort = new Sort(Sort.Direction.ASC,"id");
 
