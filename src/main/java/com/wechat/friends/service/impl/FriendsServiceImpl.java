@@ -30,7 +30,7 @@ public class FriendsServiceImpl implements FriendsService {
 	ImagesService imagesService;
 	
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public Friend createOneMoment (String content,List<String> ids) throws BusinessException {
 		//create friend in db
 		Friend friend=new Friend();
@@ -39,16 +39,17 @@ public class FriendsServiceImpl implements FriendsService {
 		friend.setFriendState(FriendState.EXIST);
 		Friend friendIndb = friendRepository.saveAndFlush(friend);
 		//refresh img in db
-		for(String id:ids){
-			imagesService.refreshImgFriend(id,friendIndb);
+		if(ids!=null && ids.size() >=1 ){
+			for(String id:ids){
+				imagesService.refreshImgFriend(id,friendIndb);
+			}
 		}
-		
 		return friend;
 	}
 	
 	@Override
 	public Friend getOneMoment (String id,FriendState friendState) throws BusinessException {
-		Optional<Friend> friend=friendRepository.findById(id,friendState);
+		Optional<Friend> friend=friendRepository.findByIdAndFriendState(id,friendState);
 		if(!friend.isPresent()){
 			throw new BusinessException("moment is not existed",0,404);
 		}
