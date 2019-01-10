@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delUser(int id) throws BusinessException {
         if (!userRepository.existsById(id)) {
-            throw new BusinessException("this id is not exists",0,500);
+            throw new BusinessException("this id is not exists",0,404);
         }
         userRepository.deleteById(id);
     }

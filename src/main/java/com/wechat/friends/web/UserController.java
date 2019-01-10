@@ -10,10 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -30,27 +27,24 @@ public class UserController {
     UserService userService;
 
     //add a user
-    @PostMapping(value = "addUser")
-    public String add(@RequestBody(required = false) UserDTO userDTO) throws BusinessException {
+    @PostMapping
+    public void add(@RequestBody(required = false) UserDTO userDTO) throws BusinessException {
         userService.addUser(userDTO.getName(),userDTO.getPassword());
-        return "successfully added";
     }
     //delete a user by id
-    @PostMapping(value = "delUser")
-    public String delete(int id) throws BusinessException {
+    @DeleteMapping("/{id}")
+    public void delete(int id) throws BusinessException {
         userService.delUser(id);
-        return "successfully deleted";
     }
     //update a user
-    @PostMapping(value = "updateUser")
-    public String update(User user) throws BusinessException {
+    @PutMapping
+    public void update(User user) throws BusinessException {
         userService.updateUser(user.getId(),user.getName(),user.getPassword());
-        return "successfully updated";
     }
 
     //list all users
-    @PostMapping(value = "listAllUser")
-    public Page<User> listAll(Integer page , Integer size) throws BusinessException {
+    @GetMapping("list/{page}/{size}")
+    public Page<User> listAll(@PathVariable("page") Integer page , @PathVariable("size")Integer size) throws BusinessException {
         //sort by id in asc
         Sort sort = new Sort(Sort.Direction.ASC,"id");
 
