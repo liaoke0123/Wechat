@@ -14,9 +14,9 @@ import java.util.List;
 public interface UserService {
     User addUser(String name, String password) throws BusinessException;
 
-    void delUser(int id) throws BusinessException;
+    void delUser(String id) throws BusinessException;
 
     Page<User> listAllUser(Pageable pageable) throws BusinessException;
 
-    void updateUser(int id,String name,String password) throws BusinessException;
+    void updateUser(String id,String name,String password) throws BusinessException;
 }

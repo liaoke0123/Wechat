@@ -33,7 +33,7 @@ public class UserController {
     }
     //delete a user by id
     @DeleteMapping("/{id}")
-    public void delete(int id) throws BusinessException {
+    public void delete(String id) throws BusinessException {
         userService.delUser(id);
     }
     //update a user

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delUser(int id) throws BusinessException {
+    public void delUser(String id) throws BusinessException {
         if (!userRepository.existsById(id)) {
             throw new BusinessException("this id is not exists",0,404);
         }
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(int id,String name,String password) throws BusinessException {
+    public void updateUser(String id,String name,String password) throws BusinessException {
         userRepository.queryById(id,name,password);
     }
 }

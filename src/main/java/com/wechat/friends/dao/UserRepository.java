@@ -12,8 +12,8 @@ import javax.transaction.Transactional;
  * Created by share on 2019/1/8.
  */
 @Transactional
-public interface UserRepository  extends JpaRepository<User,Integer> {
+public interface UserRepository  extends JpaRepository<User,String> {
     @Modifying
     @Query(value = "update wechat_user set name=:name,password=:password where id =:id",nativeQuery = true)
-    public void queryById(@Param("id") int id, @Param("name") String name, @Param("password") String password);
+    public void queryById(@Param("id") String id, @Param("name") String name, @Param("password") String password);
 }
