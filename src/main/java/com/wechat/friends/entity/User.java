@@ -3,6 +3,7 @@ package com.wechat.friends.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by share on 2019/1/8.
@@ -19,6 +20,10 @@ public class User {
     private String name;
     @Column(name="password",nullable = true,length = 50)
     private String password;
+    
+    //***************associated*************** //关联表处理
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
+    private Set<Comment> comments;
 
     public User() {
     }
