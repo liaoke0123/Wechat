@@ -37,10 +37,10 @@ public class UserController {
         userService.delUser(id);
     }
     //update a user
-//    @PutMapping
-//    public void update(User user) throws BusinessException {
-//        userService.updateUser(user.getId(),user.getName(),user.getPassword());
-//    }
+    @PutMapping
+    public void update(String id ,UserDTO userDTO) throws BusinessException {
+        userService.updateUser(id,userDTO.getName(),userDTO.getPassword());
+    }
 
     //list all users
     @GetMapping("list/{page}/{size}")
