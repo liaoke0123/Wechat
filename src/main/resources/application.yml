@@ -1,0 +1,18 @@
+spring:
+  resources:
+    static-locations: file:${filePath},classpath:/static/,classpath:/public/,classpath:/resources/,classpath:/META-INF/resources/
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/testjpa
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎
+    show-sql: false
+server:
+  port: 12345
+
+filePath: D:/fileUpload/
