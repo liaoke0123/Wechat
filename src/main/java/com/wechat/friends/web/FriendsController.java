@@ -35,10 +35,20 @@ public class FriendsController {
         return map;
     }
     
+    @Deprecated  //此方法将被弃用，不建议使用
     @ApiOperation(value = "发布朋友圈")
     @PostMapping(value = "/createMoment",produces = "application/json;charset=UTF-8")
     public Object createMoment(@RequestBody FriendsDTO friendsDTO) throws BusinessException {
 		Friend friend=friendsService.createOneMoment(friendsDTO.getContent(),friendsDTO.getIds());
+        HashMap<String,String> map =  new HashMap<>();
+        map.put("friendId",friend.getId());
+        return map;
+    }
+    
+    @ApiOperation(value = "用户发布朋友圈")
+    @PostMapping(value = "/createMomentByUser",produces = "application/json;charset=UTF-8")
+    public Object createMoment(@RequestBody FriendsDTO friendsDTO,String user_id) throws BusinessException {
+		Friend friend=friendsService.createOneMomentByUser(friendsDTO.getContent(),friendsDTO.getIds(),user_id);
         HashMap<String,String> map =  new HashMap<>();
         map.put("friendId",friend.getId());
         return map;

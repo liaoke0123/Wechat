@@ -1,6 +1,7 @@
 package com.wechat.friends.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wechat.friends.fenum.CommentState;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,6 +39,12 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="friend_id")
+	private Friend friend;
+	
+	
 	
 	public Comment () {
 	}
@@ -88,5 +95,13 @@ public class Comment {
 	
 	public void setUser (User user) {
 		this.user = user;
+	}
+	
+	public Friend getFriend () {
+		return friend;
+	}
+	
+	public void setFriend (Friend friend) {
+		this.friend = friend;
 	}
 }

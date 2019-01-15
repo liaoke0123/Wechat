@@ -3,7 +3,9 @@ package com.wechat.friends.service.impl;
 
 import com.wechat.friends.dao.FriendRepository;
 import com.wechat.friends.dao.ImageRepository;
+import com.wechat.friends.dao.UserRepository;
 import com.wechat.friends.entity.Friend;
+import com.wechat.friends.entity.User;
 import com.wechat.friends.exception.BusinessException;
 import com.wechat.friends.fenum.FriendState;
 import com.wechat.friends.fenum.FriendsContentType;
@@ -29,6 +31,10 @@ public class FriendsServiceImpl implements FriendsService {
 	@Resource
 	ImagesService imagesService;
 	
+	@Resource
+	UserRepository userRepository;
+	
+	//此方法将被弃用，不建议使用
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Friend createOneMoment (String content,List<String> ids) throws BusinessException {
@@ -37,6 +43,30 @@ public class FriendsServiceImpl implements FriendsService {
 		friend.setTextContent(content);
 		friend.setContentType(FriendsContentType.NORMAL);
 		friend.setFriendState(FriendState.EXIST);
+		Friend friendIndb = friendRepository.saveAndFlush(friend);
+		//refresh img in db
+		if(ids!=null && ids.size() >=1 ){
+			for(String id:ids){
+				imagesService.refreshImgFriend(id,friendIndb);
+			}
+		}
+		return friend;
+	}
+	
+	@Override
+	public Friend createOneMomentByUser (String content, List<String> ids, String user_id) throws BusinessException {
+		//create friend in db
+		Friend friend=new Friend();
+		friend.setTextContent(content);
+		friend.setContentType(FriendsContentType.NORMAL);
+		friend.setFriendState(FriendState.EXIST);
+		
+		Optional<User> user=userRepository.findById(user_id);
+		if(!user.isPresent()){
+			throw new BusinessException("id is not existed",0,404);
+		}
+		friend.setUser(user.get());
+		
 		Friend friendIndb = friendRepository.saveAndFlush(friend);
 		//refresh img in db
 		if(ids!=null && ids.size() >=1 ){

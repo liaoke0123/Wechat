@@ -46,6 +46,13 @@ public class Friend{
      */
     @OneToMany(mappedBy="friend",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
     private Set<Image> images;
+    
+    @OneToMany(mappedBy="friend",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
+    private Set<Comment> comments;
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
 
 
     //TODO 评论 点赞
@@ -117,8 +124,24 @@ public class Friend{
     public void setFriendState (FriendState friendState) {
         this.friendState = friendState;
     }
-    
-    @Override
+	
+	public Set<Comment> getComments () {
+		return comments;
+	}
+	
+	public void setComments (Set<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public User getUser () {
+		return user;
+	}
+	
+	public void setUser (User user) {
+		this.user = user;
+	}
+	
+	@Override
     public String toString () {
         return "\nFriend{" +
                 "id='" + id + '\'' +

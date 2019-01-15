@@ -1,5 +1,6 @@
 package com.wechat.friends.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,6 +25,9 @@ public class User {
     //***************associated*************** //关联表处理
     @OneToMany(mappedBy="user",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
     private Set<Comment> comments;
+    
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
+    private Set<Friend> friends;
 
     public User() {
     }
@@ -51,4 +55,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+	
+	public Set<Comment> getComments () {
+		return comments;
+	}
+	
+	public void setComments (Set<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public Set<Friend> getFriends () {
+		return friends;
+	}
+	
+	public void setFriends (Set<Friend> friends) {
+		this.friends = friends;
+	}
 }
