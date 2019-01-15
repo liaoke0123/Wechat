@@ -36,10 +36,12 @@ public class Comment {
 	private CommentState commentState; //评论状态
 	
 	//***************associated*************** //关联表处理
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="friend_id")
 	private Friend friend;

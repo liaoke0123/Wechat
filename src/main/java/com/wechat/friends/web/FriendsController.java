@@ -56,14 +56,14 @@ public class FriendsController {
 	
 	@ApiOperation(value = "通过id获取一条朋友圈")
 	@GetMapping(value = "/getMomentByID",produces = "application/json;charset=UTF-8")
-	public Object getMomentByIDAndFriendState(String id,@RequestParam("friendState") FriendState friendState) throws BusinessException{
+	public Object getMomentByIdAndFriendState(String id,@RequestParam("friendState") FriendState friendState) throws BusinessException{
 		return friendsService.getOneMoment(id,friendState);
 	}
 	
 	@ApiOperation(value = "获取所有朋友圈并分页显示")
 	@GetMapping(value = "/getAllMoments",produces = "application/json;charset=UTF-8")
-	public Object getAllMoments(@RequestParam("friendState") FriendState friendState,int pageSize,int pageNum) throws BusinessException{
-		Page<Friend> friends=friendsService.getAllMoments(friendState,pageNum,pageSize);
+	public Object getAllCommentsByFriendState(@RequestParam("friendState") FriendState friendState,int pageSize,int pageNum) throws BusinessException{
+		Page<Friend> friends=friendsService.getAllMoments(friendState,pageSize,pageNum);
 		return friends;
 	}
 	

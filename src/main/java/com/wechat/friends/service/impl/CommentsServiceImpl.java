@@ -10,6 +10,8 @@ import com.wechat.friends.entity.User;
 import com.wechat.friends.exception.BusinessException;
 import com.wechat.friends.fenum.CommentState;
 import com.wechat.friends.service.CommentsService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,21 @@ public class CommentsServiceImpl implements CommentsService {
 		comment.setFriend(friend.get());
 		
 		return comment;
+	}
+	
+	@Override
+	public Comment getOneComment (String id, CommentState commentState) throws BusinessException {
+		Optional<Comment> comment=commentRepository.findByIdAndCommentState(id,commentState);
+		if(!comment.isPresent()){
+			throw new BusinessException("comment is not existed",0,404);
+		}
+		return comment.get();
+	}
+	
+	@Override
+	public Page<Comment> getAllComments (CommentState commentState, String friend_id, int pageSize, int pageNum) throws BusinessException {
+		Page<Comment> result = commentRepository.findAllByCommentStateAndFriend_Id(commentState, friend_id, PageRequest.of(pageNum,pageSize) );
+		return result;
 	}
 	
 }

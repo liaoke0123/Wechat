@@ -1,5 +1,6 @@
 package com.wechat.friends.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wechat.friends.fenum.FriendState;
 import com.wechat.friends.fenum.FriendsContentType;
 import org.hibernate.annotations.GenericGenerator;
@@ -50,6 +51,7 @@ public class Friend{
     @OneToMany(mappedBy="friend",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
     private Set<Comment> comments;
 	
+    @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private User user;
