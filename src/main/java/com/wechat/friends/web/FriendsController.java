@@ -62,14 +62,14 @@ public class FriendsController {
 	
 	@ApiOperation(value = "获取所有朋友圈并分页显示")
 	@GetMapping(value = "/getAllMoments",produces = "application/json;charset=UTF-8")
-	public Object getAllCommentsByFriendState(@RequestParam("friendState") FriendState friendState,int pageSize,int pageNum) throws BusinessException{
+	public Object getAllMomentsByFriendState(@RequestParam("friendState") FriendState friendState,int pageSize,int pageNum) throws BusinessException{
 		Page<Friend> friends=friendsService.getAllMoments(friendState,pageSize,pageNum);
 		return friends;
 	}
 	
 	@ApiOperation(value = "通过id删除朋友圈")
 	@DeleteMapping(value = "/deleteMoment/{id}")
-	public void deleteFileByID(@PathVariable String id) throws BusinessException {
+	public void deleteMomentByID(@PathVariable String id) throws BusinessException {
 		friendsService.deleteOneMoment(id);
 	}
 

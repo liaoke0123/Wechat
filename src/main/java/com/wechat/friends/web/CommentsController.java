@@ -6,6 +6,7 @@ import com.wechat.friends.entity.Comment;
 import com.wechat.friends.exception.BusinessException;
 import com.wechat.friends.fenum.CommentState;
 import com.wechat.friends.service.CommentsService;
+import com.wechat.friends.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class CommentsController {
 		Comment comment = commentService.createOneCommentByUser(commentDTO.getCommentContent(), user_id, friend_id);
 		HashMap<String, String> map = new HashMap<>();
 		map.put("commentId", comment.getId());
+		map.put("commentator", comment.getUser().getName());  //评论人
+		map.put("commentContent", comment.getCommentContent());
 		return map;
 	}
 	
@@ -42,6 +45,12 @@ public class CommentsController {
 	public Object getAllCommentsByCommentStateAndFriend(@RequestParam("commentState") CommentState commentState, @RequestParam("friend_id")String friend_id,int pageSize,int pageNum) throws BusinessException{
 		Page<Comment> comments=commentService.getAllComments(commentState, friend_id,pageSize,pageNum);
 		return comments;
+	}
+	
+	@ApiOperation(value = "通过id删除评论")
+	@DeleteMapping(value = "/deleteComment/{id}")
+	public void deleteCommentById(@PathVariable String id) throws BusinessException {
+		commentService.deleteOneComment(id);
 	}
 	
 }

@@ -69,4 +69,14 @@ public class CommentsServiceImpl implements CommentsService {
 		return result;
 	}
 	
+	@Override
+	@Transactional
+	public void deleteOneComment (String id) throws BusinessException {
+		Optional<Comment> comment=commentRepository.findById(id);
+		if(!comment.isPresent()){
+			throw new BusinessException("moment is not existed",0,404);
+		}
+		comment.get().setCommentState(CommentState.DELETED);
+	}
+	
 }

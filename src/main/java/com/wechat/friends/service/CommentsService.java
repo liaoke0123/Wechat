@@ -14,6 +14,6 @@ public interface CommentsService {
 	
 	Page<Comment> getAllComments(CommentState commentState, String friend_id, int pageSize, int pageNum) throws BusinessException;
 	
-	//TODO 评论删除
+	void deleteOneComment(String id) throws BusinessException;
 
 }
