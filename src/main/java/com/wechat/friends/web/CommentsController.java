@@ -25,13 +25,16 @@ public class CommentsController {
 	
 	@ApiOperation(value = "用户评论朋友圈")
 	@PostMapping(value = "/createCommentByUser", produces = "application/json;charset=UTF-8")
-	public Object createOneCommentByUser (@RequestBody CommentsDTO commentDTO, String user_id, String friend_id) throws BusinessException {
-		Comment comment = commentService.createOneCommentByUser(commentDTO.getCommentContent(), user_id, friend_id);
-		HashMap<String, String> map = new HashMap<>();
-		map.put("commentId", comment.getId());
-		map.put("commentator", comment.getUser().getName());  //评论人
-		map.put("commentContent", comment.getCommentContent());
-		return map;
+	public Object createOneCommentByUser (@RequestBody CommentsDTO commentDTO) throws BusinessException {
+		Comment comment = commentService.createOneCommentByUser(commentDTO.getCommentContent(), commentDTO.getCommentator_id(), commentDTO.getFriend_id());
+
+		CommentsDTO cDTO=new CommentsDTO();
+		cDTO.setComment_id(comment.getId());
+		cDTO.setCommentContent(comment.getCommentContent());
+		cDTO.setFriend_id(comment.getFriend().getId());  //朋友圈id
+		cDTO.setCommentator_id(comment.getUser().getId());  //评论人id
+		cDTO.setCommentator(comment.getUser().getName());  //评论人
+		return cDTO;
 	}
 	
 	@ApiOperation(value = "通过id获取一条评论")

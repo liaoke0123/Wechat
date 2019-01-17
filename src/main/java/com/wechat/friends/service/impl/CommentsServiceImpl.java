@@ -41,13 +41,13 @@ public class CommentsServiceImpl implements CommentsService {
 		
 		Optional<User> user=userRepository.findById(user_id);
 		if(!user.isPresent()){
-			throw new BusinessException("id is not existed",0,404);
+			throw new BusinessException("user is not existed",0,404);
 		}
 		comment.setUser(user.get());
 		
 		Optional<Friend> friend=friendRepository.findById(friend_id);
 		if(!friend.isPresent()){
-			throw new BusinessException("id is not existed",0,404);
+			throw new BusinessException("moment is not existed",0,404);
 		}
 		comment.setFriend(friend.get());
 		

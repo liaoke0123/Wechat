@@ -28,6 +28,9 @@ public class User {
     
     @OneToMany(mappedBy="user",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
     private Set<Friend> friends;
+	
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
+	private Set<Reply> replies;
 
     public User() {
     }
@@ -70,5 +73,13 @@ public class User {
 	
 	public void setFriends (Set<Friend> friends) {
 		this.friends = friends;
+	}
+	
+	public Set<Reply> getReplies () {
+		return replies;
+	}
+	
+	public void setReplies (Set<Reply> replies) {
+		this.replies = replies;
 	}
 }
