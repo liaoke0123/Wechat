@@ -50,6 +50,9 @@ public class Friend{
     
     @OneToMany(mappedBy="friend",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
     private Set<Comment> comments;
+    
+    @OneToMany(mappedBy="friend",cascade=CascadeType.ALL)
+    private Set<Reply> replies;
 	
     @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
@@ -142,10 +145,18 @@ public class Friend{
 	public void setUser (User user) {
 		this.user = user;
 	}
-	
-	@Override
+    
+    public Set<Reply> getReplies () {
+        return replies;
+    }
+    
+    public void setReplies (Set<Reply> replies) {
+        this.replies = replies;
+    }
+    
+    @Override
     public String toString () {
-        return "\nFriend{" +
+        return "Friend{" +
                 "id='" + id + '\'' +
                 ", createdDate=" + createdDate +
                 ", LastModifiedDate=" + LastModifiedDate +

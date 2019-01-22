@@ -32,19 +32,22 @@ public class Reply {
 	@Column(name="replyContent",nullable = false,columnDefinition = "text",length = 2000)
 	private String replyContent;
 	
-	@Column(name="commentState",nullable = false,length = 30 )
+	@Column(name="replyState",nullable = false,length = 30 )
 	private ReplyState replyState; //回复状态
+	
+	@Column(name="myUserId",nullable = false,length = 32 )
+	private String myUserId;
 	
 	//***************associated*************** //关联表处理
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="comment_id")
-	private Comment comment;
+	@JoinColumn(name="ReplyUser_id")
+	private User user;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="ReplyUser_id")
-	private User user;
+	@JoinColumn(name="friend_id")
+	private Friend friend;
 	
 	
 	
@@ -91,12 +94,12 @@ public class Reply {
 		this.replyState = replyState;
 	}
 	
-	public Comment getComment () {
-		return comment;
+	public String getMyUserId () {
+		return myUserId;
 	}
 	
-	public void setComment (Comment comment) {
-		this.comment = comment;
+	public void setMyUserId (String myUserId) {
+		this.myUserId = myUserId;
 	}
 	
 	public User getUser () {
@@ -105,5 +108,13 @@ public class Reply {
 	
 	public void setUser (User user) {
 		this.user = user;
+	}
+	
+	public Friend getFriend () {
+		return friend;
+	}
+	
+	public void setFriend (Friend friend) {
+		this.friend = friend;
 	}
 }

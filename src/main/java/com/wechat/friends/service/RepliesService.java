@@ -8,11 +8,11 @@ import org.springframework.data.domain.Page;
 
 public interface RepliesService {
 
-	Reply createOneReplyByUser (String content, String comment_id,String user_id) throws BusinessException;
+	Reply createOneReplyByUser (String content, String myUser_id,String replier_id,String friend_id) throws BusinessException;
 	
 	Reply getOneReply (String id, ReplyState replyState) throws BusinessException;
 	
-	Page<Reply> getAllReplys (ReplyState replyState, String comment_id, int pageSize, int pageNum) throws BusinessException;
+	Page<Reply> getAllReplys (ReplyState replyState,String friend_id, int pageSize, int pageNum) throws BusinessException;
 	
 	void deleteOneReply (String id) throws BusinessException;
 

@@ -7,21 +7,20 @@ public class RepliesDTO {
 	
     private String replyContent;
     
-    private String comment_id;
+    private String myUser_id;
     
     private String replier_id;
+    
+    private String friend_id;
 	
 	@ApiModelProperty(hidden = true)
     private String reply_id;
 	
 	@ApiModelProperty(hidden = true)
-	private String commentator;
-	
-	@ApiModelProperty(hidden = true)
-	private String commentator_id;
-	
-	@ApiModelProperty(hidden = true)
 	private String replier;
+	
+	@ApiModelProperty(hidden = true)
+	private String myName;
 	
 	
 	public String getReplyContent () {
@@ -32,12 +31,12 @@ public class RepliesDTO {
 		this.replyContent = replyContent;
 	}
 	
-	public String getComment_id () {
-		return comment_id;
+	public String getMyUser_id () {
+		return myUser_id;
 	}
 	
-	public void setComment_id (String comment_id) {
-		this.comment_id = comment_id;
+	public void setMyUser_id (String myUser_id) {
+		this.myUser_id = myUser_id;
 	}
 	
 	public String getReplier_id () {
@@ -56,14 +55,6 @@ public class RepliesDTO {
 		this.reply_id = reply_id;
 	}
 	
-	public String getCommentator () {
-		return commentator;
-	}
-	
-	public void setCommentator (String commentator) {
-		this.commentator = commentator;
-	}
-	
 	public String getReplier () {
 		return replier;
 	}
@@ -72,11 +63,19 @@ public class RepliesDTO {
 		this.replier = replier;
 	}
 	
-	public String getCommentator_id () {
-		return commentator_id;
+	public String getMyName () {
+		return myName;
 	}
 	
-	public void setCommentator_id (String commentator_id) {
-		this.commentator_id = commentator_id;
+	public void setMyName (String myName) {
+		this.myName = myName;
+	}
+	
+	public String getFriend_id () {
+		return friend_id;
+	}
+	
+	public void setFriend_id (String friend_id) {
+		this.friend_id = friend_id;
 	}
 }

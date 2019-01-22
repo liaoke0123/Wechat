@@ -47,8 +47,6 @@ public class Comment {
 	@JoinColumn(name="friend_id")
 	private Friend friend;
 	
-	@OneToMany(mappedBy="comment",cascade=CascadeType.ALL) //PERSIST 创建朋友圈的时
-	private Set<Reply> replys;
 	
 	
 	public Comment () {
@@ -109,12 +107,5 @@ public class Comment {
 	public void setFriend (Friend friend) {
 		this.friend = friend;
 	}
-	
-	public Set<Reply> getReplys () {
-		return replys;
-	}
-	
-	public void setReplys (Set<Reply> replys) {
-		this.replys = replys;
-	}
+
 }

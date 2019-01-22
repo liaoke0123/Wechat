@@ -14,6 +14,6 @@ public interface ReplyRepository extends JpaRepository<Reply,String>,JpaSpecific
 	
 	Optional<Reply> findByIdAndReplyState (String id, ReplyState replyState);
 	
-	Page<Reply> findAllByReplyStateAndComment_Id (@Param("replyState") ReplyState replyState, @Param("comment_id") String comment_id, Pageable pageable);
+	Page<Reply> findAllByReplyStateAndFriend_Id (@Param("replyState") ReplyState replyState, @Param("friend_id") String friend_id, Pageable pageable);
 
 }

@@ -1,9 +1,10 @@
 package com.wechat.friends.service.impl;
 
 import com.wechat.friends.dao.CommentRepository;
+import com.wechat.friends.dao.FriendRepository;
 import com.wechat.friends.dao.ReplyRepository;
 import com.wechat.friends.dao.UserRepository;
-import com.wechat.friends.entity.Comment;
+import com.wechat.friends.entity.Friend;
 import com.wechat.friends.entity.Reply;
 import com.wechat.friends.entity.User;
 import com.wechat.friends.exception.BusinessException;
@@ -25,26 +26,27 @@ public class RepliesServiceImpl implements RepliesService {
 	ReplyRepository replyRepository;
 	
 	@Resource
-	CommentRepository commentRepository;
+	FriendRepository friendRepository;
 	
 	@Resource
 	UserRepository userRepository;
 	
 	@Override
 	@Transactional
-	public Reply createOneReplyByUser (String content, String comment_id,String user_id) throws BusinessException {
+	public Reply createOneReplyByUser (String content, String myUser_id,String replier_id,String friend_id) throws BusinessException {
 		Reply reply=new Reply();
 		reply.setReplyState(ReplyState.EXIST);
 		reply.setReplyContent(content);
+		reply.setMyUserId(myUser_id);
 		replyRepository.saveAndFlush(reply);
 		
-		Optional<Comment> comment=commentRepository.findById(comment_id);
-		if(!comment.isPresent()){
+		Optional<Friend> friend=friendRepository.findById(friend_id);
+		if(!friend.isPresent()){
 			throw new BusinessException("comment is not existed",0,404);
 		}
-		reply.setComment(comment.get());
+		reply.setFriend(friend.get());
 		
-		Optional<User> user=userRepository.findById(user_id);
+		Optional<User> user=userRepository.findById(replier_id);
 		if(!user.isPresent()){
 			throw new BusinessException("user is not existed",0,404);
 		}
@@ -62,8 +64,8 @@ public class RepliesServiceImpl implements RepliesService {
 	}
 	
 	@Override
-	public Page<Reply> getAllReplys (ReplyState replyState, String comment_id, int pageSize, int pageNum) throws BusinessException {
-		Page<Reply> result=replyRepository.findAllByReplyStateAndComment_Id(replyState,comment_id, PageRequest.of(pageNum,pageSize) );
+	public Page<Reply> getAllReplys (ReplyState replyState, String friend_id, int pageSize, int pageNum) throws BusinessException {
+		Page<Reply> result=replyRepository.findAllByReplyStateAndFriend_Id(replyState,friend_id, PageRequest.of(pageNum,pageSize) );
 		return result;
 	}
 	
